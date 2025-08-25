@@ -19,5 +19,5 @@ RUN apt-get update && apt-get install -y \
   python3-venv
 
 WORKDIR /mjx
-RUN git clone --recursive https://github.com/mjx-project/mjx.git .
+RUN git clone --recursive https://github.com/akinoria/mjx.git .
 COPY setup.py .

@@ -46,6 +46,10 @@ class Observation:
         assert self._cpp_obj is not None
         return self._cpp_obj.dealer()  # type: ignore
 
+    def dora_indicators(self) -> List[int]:  # tile id
+        assert self._cpp_obj is not None
+        return self._cpp_obj.dora_indicators()  # type: ignore
+
     def doras(self) -> List[TileType]:
         assert self._cpp_obj is not None
         return self._cpp_obj.doras()  # type: ignore

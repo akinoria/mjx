@@ -30,6 +30,7 @@ class Observation {
   int dealer() const noexcept;
   std::vector<Event> events() const noexcept;
   std::vector<int> draw_history() const noexcept;
+  std::vector<int> dora_indicators() const noexcept;
   std::vector<int> doras() const noexcept;
   int kyotaku() const noexcept;
   int honba() const noexcept;

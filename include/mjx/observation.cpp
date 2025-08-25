@@ -79,6 +79,14 @@ std::vector<int> Observation::draw_history() const noexcept {
   return draw;
 }
 
+std::vector<int> Observation::dora_indicators() const noexcept {
+  std::vector<int> doras;
+  for (auto t : proto_.public_observation().dora_indicators()) {
+    doras.push_back(internal::Tile(t).Id());
+  }
+  return doras;
+}
+
 std::vector<int> Observation::doras() const noexcept {
   std::vector<int> doras;
   for (auto t : proto_.public_observation().dora_indicators()) {
