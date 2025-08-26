@@ -69,6 +69,7 @@ PYBIND11_MODULE(_mjx, m) {
       .def("who", &mjx::Observation::who)
       .def("dealer", &mjx::Observation::dealer)
       .def("action_mask", &mjx::Observation::action_mask)
+      .def("dora_indicators", &mjx::Observation::dora_indicators)
       .def("doras", &mjx::Observation::doras)
       .def("kyotaku", &mjx::Observation::kyotaku)
       .def("honba", &mjx::Observation::honba)
