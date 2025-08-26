@@ -170,14 +170,14 @@ def _make_svg(
                     hands[i].append(
                         (
                             "\U0001F02B" if not tile.is_open else get_tile_char(tile.id(), True),
-                            tile.id in red_hai,
+                            tile.id() in red_hai,
                             tile,
                         )
                     )
 
             if t_u.tile_unit_type == TileUnitType.DISCARD:
                 for tile in t_u.tiles:
-                    discards[i].append((get_tile_char(tile.id(), True), tile.id in red_hai, tile))
+                    discards[i].append((get_tile_char(tile.id(), True), tile.id() in red_hai, tile))
             if t_u.tile_unit_type in [
                 TileUnitType.CHI,
                 TileUnitType.PON,
@@ -188,7 +188,7 @@ def _make_svg(
                 open_tiles[i].append(
                     (
                         [
-                            (get_tile_char(tile.id(), True), tile.id in red_hai, tile)
+                            (get_tile_char(tile.id(), True), tile.id() in red_hai, tile)
                             for tile in t_u.tiles
                         ],
                         t_u.from_who,
@@ -220,12 +220,28 @@ def _make_svg(
         dwg.add(dwg.text(round, (368, 360), style="font-size:26px;font-family:serif;"))
 
     # dora
-    doras = [get_tile_char(tile, True) for tile in sample_data.doras]
+    doras = [(get_tile_char(tile, True), tile in red_hai) for tile in sample_data.doras]
     while len(doras) < 5:
-        doras.append("\U0001F02B")
-    dwg.add(
-        dwg.text("".join(doras), (337, 400), style="font-size:40px;font-family:GL-MahjongTile;")
-    )
+        doras.append(("\U0001F02B", False))
+    for i, dora in enumerate(doras):
+        dwg.add(
+            dwg.text(
+                dora[0],
+                (337 + i * 25.6, 400),
+                style="font-size:40px;font-family:GL-MahjongTile;",
+                fill="red" if dora[1] else "black",
+            )
+        )
+        if dora[1]:  # 赤牌の縁を黒で埋める
+            dwg.add(
+                dwg.text(
+                    "\U0001F006",
+                    (337 + i * 25.6, 400),
+                    style="font-size:40px;font-family:GL-MahjongTile;",
+                    stroke=svgwrite.rgb(0, 0, 0, "%"),
+                    stroke_width=0.1
+                )
+            )
     for i, dora in enumerate(sample_data.doras):
         if dora == sample_data.new_dora and highlight_last_event:
             dwg.add(
