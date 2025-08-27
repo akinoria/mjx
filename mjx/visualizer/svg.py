@@ -341,6 +341,7 @@ def _make_svg(
                 pai[i],
                 (left_margin + j * char_width, 770),
                 hand_txt,
+                is_red=hand[1]
                 highliting=hand[2].is_highlighting and highlight_last_event,
             )
 
